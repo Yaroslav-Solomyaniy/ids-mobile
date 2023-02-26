@@ -1,6 +1,7 @@
 import {Pressable, Text, TextInput, View} from 'react-native';
 import React, {useState} from 'react';
 import styles from './LoginForm.scss';
+import {useBottomSheet} from '@gorhom/bottom-sheet';
 interface ILoginForm {
   email: string;
   password: string;
@@ -12,12 +13,17 @@ const initialValue: ILoginForm = {
 };
 const LoginForm = () => {
   const [formData, setFormData] = useState<ILoginForm>(initialValue);
+  const {snapToIndex} = useBottomSheet();
   const isDisabledSubmitBtn =
     formData.email.length < 10 || formData.password.length < 10;
 
   const handleSubmit = () => {
     console.log(formData);
     setFormData(initialValue);
+  };
+
+  const handleReset = () => {
+    snapToIndex(1);
   };
 
   return (
@@ -39,7 +45,9 @@ const LoginForm = () => {
         autoCorrect={false}
         placeholderTextColor={'#6F6F6F'}
       />
-      <Text style={styles.text}>Забули пароль?</Text>
+      <Pressable onPress={handleReset}>
+        <Text style={styles.text}>Забули пароль?</Text>
+      </Pressable>
       <Pressable
         disabled={isDisabledSubmitBtn}
         style={({pressed}) => [
