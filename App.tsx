@@ -1,15 +1,22 @@
 import React from 'react';
-import {Text, View} from 'react-native';
-import styles from './app.scss';
-import SVGImg from './logo.svg';
+import {View, StyleSheet, StatusBar} from 'react-native';
+import Login from './src/screens/Login/Login';
 
 const App = () => {
   return (
-    <View>
-      <Text style={styles.text}>App</Text>
-      <SVGImg width={200} height={200} />
+    <View style={styles.container}>
+      <Login />
+      <StatusBar translucent backgroundColor={'transparent'} />
     </View>
   );
 };
-
 export default App;
+
+// React Native Styles
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});

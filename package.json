@@ -6,10 +6,11 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "lint": "eslint .",
-    "start": "react-native start",
+    "start": "react-native start --reset-cache",
     "test": "jest"
   },
   "dependencies": {
+    "@gorhom/bottom-sheet": "^4.4.5",
     "metro-react-native-babel-transformer": "^0.75.1",
     "node-sass": "^8.0.0",
     "react": "18.2.0",

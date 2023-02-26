@@ -1,0 +1,17 @@
+.screen{
+  background: #003366;
+  height: 100%;
+  width: 100%;
+
+  &_logo{
+    height: 50%;
+  }
+
+  &_form{
+    height: 50%;
+  }
+}
+
+.logo{
+  margin: auto;
+}
