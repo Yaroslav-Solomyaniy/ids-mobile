@@ -1,13 +1,16 @@
 import React from 'react';
 import {View, StyleSheet, StatusBar} from 'react-native';
 import Login from './src/screens/Login/Login';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 const App = () => {
   return (
-    <View style={styles.container}>
-      <Login />
-      <StatusBar translucent backgroundColor={'transparent'} />
-    </View>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <View style={styles.container}>
+        <Login />
+        <StatusBar translucent backgroundColor={'transparent'} />
+      </View>
+    </GestureHandlerRootView>
   );
 };
 export default App;
