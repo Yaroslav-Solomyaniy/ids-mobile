@@ -1,0 +1,19 @@
+.button{
+  padding: 16px 0;
+  width: 100%;
+  background: #428BCA;
+  border-radius: 8px;
+  &_text{
+    text-align: center;
+    color: #FEFEFE;
+    font-size: 17px;
+    font-weight: 500;
+  }
+}
+
+.disabled_btn{
+  background: #DCDCDC;
+}
+.pressed_btn{
+  background: #0e6ebb;
+}

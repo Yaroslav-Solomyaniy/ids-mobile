@@ -1,15 +1,11 @@
-import {
-  Button,
-  Pressable,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from 'react-native';
+import {Pressable, Text, View} from 'react-native';
 import React, {useCallback, useMemo, useRef, useState} from 'react';
 import styles from './LoginForm.scss';
 import {BottomSheetModal, BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 import ResetPasswordForm from '../ResetPasswordForm/ResetPasswordForm';
+import CustomButton from '../CustomButton';
+import CustomInput from '../CustomInput';
+import {useNavigation} from '@react-navigation/native';
 interface ILoginForm {
   email: string;
   password: string;
@@ -23,11 +19,26 @@ const LoginForm = () => {
   const [formData, setFormData] = useState<ILoginForm>(initialValue);
   const isDisabledSubmitBtn =
     formData.email.length < 10 || formData.password.length < 10;
+  const navigator = useNavigation<any>();
 
   const handleSubmit = () => {
     console.log(formData);
+    navigator.navigate('IndividualPlan');
     setFormData(initialValue);
   };
+
+  const handleChangeEmail = useCallback(
+    (email: string) => {
+      setFormData({...formData, email: email});
+    },
+    [formData],
+  );
+  const handleChangePassword = useCallback(
+    (password: string) => {
+      setFormData({...formData, password: password});
+    },
+    [formData],
+  );
 
   // ref
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
@@ -51,36 +62,27 @@ const LoginForm = () => {
   return (
     <BottomSheetModalProvider>
       <View style={styles.form}>
-        <TextInput
+        <CustomInput
           placeholder={'E-mail'}
-          onChangeText={text => setFormData({...formData, email: text})}
+          onChangeText={email => handleChangeEmail(email)}
           value={formData.email}
-          style={[styles.input, styles.input_email]}
-          autoCorrect={false}
-          placeholderTextColor={'#6F6F6F'}
+          style={styles.input_email}
         />
-        <TextInput
+        <CustomInput
           placeholder={'Пароль'}
-          secureTextEntry={true}
-          onChangeText={text => setFormData({...formData, password: text})}
+          onChangeText={password => handleChangePassword(password)}
           value={formData.password}
-          style={[styles.input, styles.input_password]}
-          autoCorrect={false}
-          placeholderTextColor={'#6F6F6F'}
+          style={styles.input_password}
+          isSecurity={true}
         />
         <Pressable onPress={handlePresentModalPress}>
           <Text style={styles.text}>Забули пароль?</Text>
         </Pressable>
-        <Pressable
+        <CustomButton
           disabled={isDisabledSubmitBtn}
-          style={({pressed}) => [
-            styles.button,
-            isDisabledSubmitBtn && styles.disabled_btn,
-            pressed && styles.btn_pressed,
-          ]}
-          onPress={handleSubmit}>
-          <Text style={styles.button_text}>Вхід</Text>
-        </Pressable>
+          onPress={handleSubmit}
+          buttonText={'Вхід'}
+        />
 
         <BottomSheetModal
           ref={bottomSheetModalRef}

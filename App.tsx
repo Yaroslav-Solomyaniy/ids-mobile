@@ -1,25 +1,13 @@
 import React from 'react';
-import {View, StyleSheet, StatusBar} from 'react-native';
-import Login from './src/screens/Login/Login';
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {StatusBar} from 'react-native';
+import Navigator from './src/navigations/Navigator';
 
 const App = () => {
   return (
-    <GestureHandlerRootView style={{flex: 1}}>
-      <View style={styles.container}>
-        <Login />
-        <StatusBar translucent backgroundColor={'transparent'} />
-      </View>
-    </GestureHandlerRootView>
+    <>
+      <StatusBar translucent backgroundColor={'transparent'} />
+      <Navigator isAuth={true} />
+    </>
   );
 };
 export default App;
-
-// React Native Styles
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
