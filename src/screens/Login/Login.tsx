@@ -1,9 +1,9 @@
-import React from 'react';
-import {View} from 'react-native';
-import LoginForm from '../../components/LoginForm/LoginForm';
-import styles from './Login.scss';
-import Logo from './../../assets/img/Vector.svg';
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import React from "react";
+import { View } from "react-native";
+import LoginForm from "../../components/LoginForm/LoginForm";
+import styles from "./Login.scss";
+import Logo from "./../../assets/img/Vector.svg";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const Login = () => {
   return (

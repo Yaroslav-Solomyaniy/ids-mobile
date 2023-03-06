@@ -4,45 +4,14 @@
   align-items: center;
   padding: 24px;
 }
-
 .title{
   color: rgba(0, 0, 0, 0.75);
-  font-weight: 500;
   font-size: 17px;
   line-height: 22px;
 }
-
 .input{
-  border:#428BCA;
   margin-top: 10px;
-  padding: 16px;
-  background: white;
-  border-radius: 8px;
-  width: 100%;
-  color: rgba(0, 0, 0, 0.75);
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 21px;
 }
 .button{
   margin-top: 16px;
-  width: 100%;
-  padding: 13px 16px;
-  outline: none;
-
-  background: #428BCA;
-  border-radius: 8px;
-}
-.buttonTitle{
-  color: #FEFEFE;
-  font-weight: 500;
-  font-size: 17px;
-  line-height: 22px;
-  text-align: center;
-}
-.pressedButton{
-  background: #0e6ebb;
-}
-.disabledButton{
-  background: #DCDCDC;
 }

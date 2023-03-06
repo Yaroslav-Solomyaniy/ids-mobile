@@ -1,40 +1,37 @@
-import React, {useState} from 'react';
-import {Pressable, Text, TextInput, View} from 'react-native';
-import styles from './ResetPassswordForm.scss';
-import {useBottomSheetModal} from '@gorhom/bottom-sheet';
-import {Email} from '../../RegEx';
+import React, { useState } from "react";
+import { Pressable, Text, TextInput, View } from "react-native";
+import styles from "./ResetPassswordForm.scss";
+import { useBottomSheetModal } from "@gorhom/bottom-sheet";
+import { Email } from "../../RegEx";
+import CustomText from "../CustomText";
+import CustomButton from "../CustomButton";
+import CustomInput from "../CustomInput";
 
 const ResetPasswordForm = (): JSX.Element => {
-  const {dismissAll} = useBottomSheetModal();
-  const [email, setEmail] = useState<string>('');
-
-  // const onChangeText = () => {
-  //   console.log(email);
-  // };
-
+  const { dismissAll } = useBottomSheetModal();
+  const [email, setEmail] = useState<string>("");
   const isDisabledButton = !Email.test(email);
 
   return (
     <View style={styles.content}>
-      <Text style={styles.title}>Відновлення паролю</Text>
-      <TextInput
-        placeholder={'E-mail'}
-        autoCorrect={false}
-        placeholderTextColor={'#6F6F6F'}
-        style={styles.input}
-        value={email}
-        onChangeText={text => setEmail(text)}
+      <CustomText
+        textWeight={"500"}
+        andStyles={styles.title}
+        text={"Відновлення паролю"}
       />
-      <Pressable
+      <CustomInput
+        placeholder={"E-mail"}
+        onChangeText={(data) => setEmail(data)}
+        value={email}
+        style={styles.input}
+        border={"blue"}
+      />
+      <CustomButton
         disabled={isDisabledButton}
-        style={({pressed}) => [
-          styles.button,
-          pressed && styles.pressedButton,
-          isDisabledButton && styles.disabledButton,
-        ]}
-        onPress={dismissAll}>
-        <Text style={styles.buttonTitle}>Надіслати пароль</Text>
-      </Pressable>
+        onPress={dismissAll}
+        buttonText={"Надіслати пароль"}
+        andStyles={styles.button}
+      />
     </View>
   );
 };

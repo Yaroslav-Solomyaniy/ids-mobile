@@ -1,19 +1,23 @@
-import {Pressable, Text, View} from 'react-native';
-import React, {useCallback, useMemo, useRef, useState} from 'react';
-import styles from './LoginForm.scss';
-import {BottomSheetModal, BottomSheetModalProvider} from '@gorhom/bottom-sheet';
-import ResetPasswordForm from '../ResetPasswordForm/ResetPasswordForm';
-import CustomButton from '../CustomButton';
-import CustomInput from '../CustomInput';
-import {useNavigation} from '@react-navigation/native';
+import { Pressable, Text, View } from "react-native";
+import React, { useCallback, useMemo, useRef, useState } from "react";
+import styles from "./LoginForm.scss";
+import {
+  BottomSheetModal,
+  BottomSheetModalProvider,
+} from "@gorhom/bottom-sheet";
+import ResetPasswordForm from "../ResetPasswordForm/ResetPasswordForm";
+import CustomButton from "../CustomButton";
+import CustomInput from "../CustomInput";
+import { useNavigation } from "@react-navigation/native";
+import CustomText from "../CustomText";
 interface ILoginForm {
   email: string;
   password: string;
 }
 
 const initialValue: ILoginForm = {
-  email: '',
-  password: '',
+  email: "",
+  password: "",
 };
 const LoginForm = () => {
   const [formData, setFormData] = useState<ILoginForm>(initialValue);
@@ -23,74 +27,76 @@ const LoginForm = () => {
 
   const handleSubmit = () => {
     console.log(formData);
-    navigator.navigate('IndividualPlan');
+    navigator.navigate("IndividualPlan");
     setFormData(initialValue);
   };
 
   const handleChangeEmail = useCallback(
     (email: string) => {
-      setFormData({...formData, email: email});
+      setFormData({ ...formData, email: email });
     },
-    [formData],
+    [formData]
   );
   const handleChangePassword = useCallback(
     (password: string) => {
-      setFormData({...formData, password: password});
+      setFormData({ ...formData, password: password });
     },
-    [formData],
+    [formData]
   );
 
   // ref
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
   // variables
-  const snapPoints = useMemo(() => ['60%', '65%', '70%'], []);
+  const snapPoints = useMemo(() => ["60%", "65%", "70%"], []);
 
   // callbacks
   const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current?.present();
   }, []);
 
-  // const handleCloseModalPress = useCallback(() => {
-  //   bottomSheetModalRef.current?.close();
-  // }, []);
-
   const handleSheetChanges = useCallback((index: number) => {
-    console.log('handleSheetChanges', index);
+    console.log("handleSheetChanges", index);
   }, []);
 
   return (
     <BottomSheetModalProvider>
       <View style={styles.form}>
         <CustomInput
-          placeholder={'E-mail'}
-          onChangeText={email => handleChangeEmail(email)}
+          placeholder={"E-mail"}
+          onChangeText={(email) => handleChangeEmail(email)}
           value={formData.email}
           style={styles.input_email}
+          border={"black"}
         />
         <CustomInput
-          placeholder={'Пароль'}
-          onChangeText={password => handleChangePassword(password)}
+          placeholder={"Пароль"}
+          onChangeText={(password) => handleChangePassword(password)}
           value={formData.password}
           style={styles.input_password}
           isSecurity={true}
+          border={"black"}
         />
         <Pressable onPress={handlePresentModalPress}>
-          <Text style={styles.text}>Забули пароль?</Text>
+          <CustomText
+            text={"Забули пароль?"}
+            textWeight={"500"}
+            andStyles={styles.text}
+          />
         </Pressable>
         <CustomButton
           disabled={isDisabledSubmitBtn}
           onPress={handleSubmit}
-          buttonText={'Вхід'}
+          buttonText={"Вхід"}
         />
-
         <BottomSheetModal
           ref={bottomSheetModalRef}
           enablePanDownToClose={true}
           enableOverDrag={true}
           index={1}
           snapPoints={snapPoints}
-          onChange={handleSheetChanges}>
+          onChange={handleSheetChanges}
+        >
           <ResetPasswordForm />
         </BottomSheetModal>
       </View>
