@@ -5,26 +5,22 @@ import {BottomSheetModal, BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 import ResetPasswordForm from '../ResetPasswordForm/ResetPasswordForm';
 import CustomButton from '../CustomButton';
 import CustomInput from '../CustomInput';
-import {useNavigation} from '@react-navigation/native';
-interface ILoginForm {
-  email: string;
-  password: string;
-}
+import {AuthContext} from '../../Context/auth';
+import {ILoginParams} from '../../api/useAuth';
 
-const initialValue: ILoginForm = {
+const initialValue: ILoginParams = {
   email: '',
   password: '',
 };
+
 const LoginForm = () => {
-  const [formData, setFormData] = useState<ILoginForm>(initialValue);
+  const {login, error} = AuthContext();
+  const [formData, setFormData] = useState<ILoginParams>(initialValue);
   const isDisabledSubmitBtn =
     formData.email.length < 10 || formData.password.length < 10;
-  const navigator = useNavigation<any>();
 
   const handleSubmit = () => {
-    console.log(formData);
-    navigator.navigate('IndividualPlan');
-    setFormData(initialValue);
+    login(formData);
   };
 
   const handleChangeEmail = useCallback(
@@ -93,6 +89,9 @@ const LoginForm = () => {
           onChange={handleSheetChanges}>
           <ResetPasswordForm />
         </BottomSheetModal>
+        {/*{error && (*/}
+
+        {/*)}*/}
       </View>
     </BottomSheetModalProvider>
   );

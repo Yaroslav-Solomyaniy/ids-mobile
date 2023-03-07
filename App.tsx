@@ -1,12 +1,15 @@
 import React from 'react';
 import {StatusBar} from 'react-native';
 import Navigator from './src/navigations/Navigator';
+import AuthProvider from './src/Context/auth';
 
 const App = () => {
   return (
     <>
-      <StatusBar translucent backgroundColor={'transparent'} />
-      <Navigator isAuth={true} />
+      <AuthProvider>
+        <StatusBar translucent backgroundColor={'transparent'} />
+        <Navigator />
+      </AuthProvider>
     </>
   );
 };
